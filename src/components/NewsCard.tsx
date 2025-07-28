@@ -10,6 +10,8 @@ interface NewsCardProps {
   onRead?: () => void;
 }
 
+const backendUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
+
 const NewsCard = ({ news, featured = false, onRead }: NewsCardProps) => {
   const navigate = useNavigate();
 
@@ -52,7 +54,7 @@ const NewsCard = ({ news, featured = false, onRead }: NewsCardProps) => {
 
   const imageUrl =
     news.image && news.image !== ''
-      ? `http://localhost:5000${news.image}`
+      ? `${backendUrl}${news.image}`
       : placeholderImages[imageIndex];
 
   if (featured) {

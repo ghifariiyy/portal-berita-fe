@@ -8,6 +8,8 @@ import { NewsItem } from './Index';
 import { formatDistanceToNow } from 'date-fns';
 import { id } from 'date-fns/locale';
 
+const backendUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
+
 const NewsDetail = () => {
   const { id: newsId } = useParams();
   const navigate = useNavigate();
@@ -23,6 +25,7 @@ const NewsDetail = () => {
         setNews(data);
       } catch (error) {
         console.error('Error fetching news:', error);
+        setNews(null);
         setNews({
           id: Number(newsId),
           title: 'Detail Berita Olahraga',
@@ -110,7 +113,7 @@ const NewsDetail = () => {
             <img
               src={
                 news.image
-                  ? `http://localhost:5000${news.image}`
+                  ? `${backendUrl}${news.image}`
                   : 'https://images.unsplash.com/photo-1614632537239-14be945c5ead?w=800&h=400&fit=crop'
               }
               alt={news.title}

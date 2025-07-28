@@ -19,6 +19,8 @@ export interface NewsItem {
   quickAccess?: string;
 }
 
+const backendUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
+
 const Index = () => {
   const [news, setNews] = useState<NewsItem[]>([]);
   const [loading, setLoading] = useState(true);
@@ -149,7 +151,7 @@ const Index = () => {
                       newsItem.image && newsItem.image.trim() !== ''
                         ? newsItem.image.startsWith('http')
                           ? newsItem.image
-                          : `http://localhost:5000${newsItem.image}`
+                          : `${backendUrl}${newsItem.image}`
                         : 'https://images.unsplash.com/photo-1614632537239-14be945c5ead?w=80&h=80&fit=crop';
 
                     return (
